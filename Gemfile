@@ -52,3 +52,6 @@ group :test do
   gem "factory_girl_rails", "~> 4.5"
 end
 
+gem "bootstrap-sass", "~> 3.3"
+gem "font-awesome-rails", "~> 4.3"
+gem "simple_form", "~> 3.1.0"
