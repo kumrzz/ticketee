@@ -1,34 +1,31 @@
 require "rails_helper"
 
-RSpec.feature "Users can create new tickets" do
+RSpec.feature "Users can view tickets" do
  before do
-  project = FactoryGirl.create(:project, name: "Internet Explorer")
-  visit project_path(project)
-  click_link "New Ticket"
+  author = FactoryGirl.create(:user)
+
+  sublime = FactoryGirl.create(:project, name: "Sublime Text 3")
+   FactoryGirl.create(:ticket, project: sublime,
+    name: "Make it shiny!",
+    description: "Gradients! Starbursts! Oh my!")
+
+  ie = FactoryGirl.create(:project, name: "Internet Explorer")
+   FactoryGirl.create(:ticket, project: ie,
+    name: "Standards compliance", description: "Isn't a joke.")
+  visit "/"
  end
 
- scenario "with valid attributes" do
-  fill_in "Name", with: "Non-standards compliance"
-  fill_in "Description", with: "My pages are ugly!"
-  click_button "Create Ticket"
+ scenario "for a given project" do
+  click_link "Sublime Text 3"
+   expect(page).to have_content "Make it shiny!"
+   expect(page).to_not have_content "Standards compliance"
 
-  expect(page).to have_content "Ticket has been created."
- end
+  click_link "Make it shiny!"
+  within("#ticket h2") do
+   expect(page).to have_content "Make it shiny!"
+  end
 
- scenario "when providing invalid attributes" do
-  click_button "Create Ticket"
-  expect(page).to have_content "Ticket has not been created."
-  expect(page).to have_content "Name can't be blank"
-  expect(page).to have_content "Description can't be blank"
- end
-
- scenario "with an invalid description" do
-  fill_in "Name", with: "Non-standards compliance"
-  fill_in "Description", with: "It sucks"
-  click_button "Create Ticket"
-
-  expect(page).to have_content "Ticket has not been created."
-  expect(page).to have_content "Description is too short"
+  expect(page).to have_content "Gradients! Starbursts! Oh my!"
  end
 
 end
