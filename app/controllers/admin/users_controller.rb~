@@ -1,0 +1,9 @@
+class Admin::UsersController < Admin::ApplicationController
+  def index
+   @users = User.order(:email)
+  end
+
+  def new
+   @user = User.new
+  end
+end
