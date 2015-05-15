@@ -1,6 +1,6 @@
 FactoryGirl.define do
- factory :ticket do
-  name "Example ticket"
-  description "An example ticket, nothing more"
+ factory :user do
+  sequence(:email) { |n| "test#{n}@example.com" }
+  password "password"
  end
 end
