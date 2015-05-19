@@ -10,10 +10,11 @@ before_action :set_project, only: [:show, :edit, :update, :destroy]
   end
 
   def edit
+   authorize @project, :update?
   end
 
   def update
-   @project = Project.find(params[:id])
+   authorize @project, :update?
    if @project.update(project_params)
     flash[:notice] = "Project has been updated."
     redirect_to @project
