@@ -74,12 +74,12 @@ describe ProjectPolicy do
 
 				it "allows viewers of the project" do
 				assign_role!(user, :viewer, project)
-				expect(subject).to permit(user, project)
+				expect(subject).not_to permit(user, project)
 				end
 
 				it "allows editors of the project" do
 				assign_role!(user, :editor, project)
-				expect(subject).to permit(user, project)
+				expect(subject).not_to permit(user, project)
 				end
 
 				it "allows managers of the project" do

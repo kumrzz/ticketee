@@ -1,0 +1,10 @@
+require 'spec_helper'
+
+describe TicketPolicy do
+
+  let(:user) { User.new }
+
+  subject { TicketPolicy }
+
+  
+end
