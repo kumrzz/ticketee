@@ -31,5 +31,3 @@
   <td><%= time_ago_in_words(@ticket.created_at) %> ago</td>
  </tr>
 </table>
-
-Author:<%= @ticket.author.email %>
